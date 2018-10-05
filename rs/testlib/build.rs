@@ -18,15 +18,13 @@ extern crate binder;
 extern crate cheddar;
 
 fn main() {
-    let dir = match env::var("CMAKE_BINARY_DIR") {
-        Ok(v) => v,
-        Err(_) => "../build".to_string()
-    };
+    let dir = env::var("RUST_HEADER_DIR")
+            .expect("RUST_HEADER_DIR environmental variable undefined");
 
-    let header = match env::var("RUST_HEADER_NAME") {
-        Ok(v) => v,
-        Err(_) => "rust-lib.h".to_string()
-    };
+    let header = env::var("RUST_HEADER_NAME")
+            .expect("RUST_HEADER_DIR environmental variable undefined");
+
+    println!("Generating header '{}' in location '{}'", header, dir);
 
     let c99 = cheddar::Header::c99()
          .name(&header);

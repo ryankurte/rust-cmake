@@ -52,18 +52,23 @@ else()
 	set(_RUST_OUTDIR ${_RUST_TARGETDIR}/debug/)
 endif()
 
-set(ENV "CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR} RUST_HEADER_NAME=${RUST_NAME}.h")
-
 # Add a target to build the rust library
 set(_BUILD_CMD "${RUST_NAME}")
 add_custom_target(${_BUILD_CMD} 
-	COMMAND "${CARGO} build ${ARGS}"
+	COMMAND ${CMAKE_COMMAND} -E env 
+	"RUST_HEADER_DIR=${CMAKE_BINARY_DIR}"
+	"RUST_HEADER_NAME=${RUST_NAME}.bin"
+	${CARGO} build ${ARGS}
 	WORKING_DIRECTORY ${_RUST_DIR}
 	DEPENDS ${_RUST_DIR}/*)
 
+# Add the same as a custom command to auto build
 add_custom_command(
-	OUTPUT ${_RUST_OUTDIR}/lib${RUST_NAME}.a ${_RUST_OUTDIR}/${RUST_NAME}.h
-	COMMAND ${ENV} ${CARGO} build ${ARGS}
+	OUTPUT ${_RUST_OUTDIR}/lib${RUST_NAME}.a ${_RUST_OUTDIR}/${RUST_NAME}.h 
+	COMMAND ${CMAKE_COMMAND} -E env 
+	"RUST_HEADER_DIR=${CMAKE_BINARY_DIR}"
+	"RUST_HEADER_NAME=${RUST_NAME}.bin"
+	${CARGO} build ${ARGS}
 	WORKING_DIRECTORY ${_RUST_DIR}
 	DEPENDS ${_RUST_DIR}/*
 )
@@ -71,14 +76,14 @@ add_custom_command(
 # Add a target to test the rust library
 set(_TEST_CMD "${RUST_NAME}-test")
 add_custom_target(${_TEST_CMD} 
-	COMMAND ${ENV} ${CARGO} test ${ARGS}
+	COMMAND ${CARGO} test ${ARGS}
 	WORKING_DIRECTORY ${_RUST_DIR}
 	DEPENDS ${_RUST_DIR}/*)
 
 # Add a target to clean the rust library
 set(_CLEAN_CMD "${RUST_NAME}-clean")
 add_custom_target(${_CLEAN_CMD} 
-	COMMAND ${ENV} ${CARGO} clean ${ARGS}
+	COMMAND ${CARGO} clean ${ARGS}
 	WORKING_DIRECTORY ${_RUST_DIR}
 )
 
