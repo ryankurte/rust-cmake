@@ -5,13 +5,11 @@
 # USAGE
 # Install nightly rust (`rustup default nightly) and rust-src (`rustup component add rust-src`)
 # and make the following additions to your top level CMakeLists.txt
-# 1. Add the cargo folder (must match library name)
-#     set(RUST_SOURCE rs)
-# 2. Include rust.cmake
+# 1. Include rust.cmake
 #     include(rust.cmake)
-# 3. Add rust-lib as a dependency for your target
-#     add_dependencies(${CMAKE_PROJECT_NAME} rust-lib)
-# 4. Link rust libraries to your target
+# 2. Call the build_rust function to build your cargo project
+#     build_rust(NAME LOCATION TARGET)
+# 3. Link rust libraries to your target
 #     target_link_libraries(${CMAKE_PROJECT_NAME} ${RUST_LIBS})
 
 # Locate cargo instance
