@@ -23,6 +23,3 @@ add_executable(example ${SOURCES})
 
 # Link to rust library
 target_link_libraries(example ${RUST_LIBS})
-
-# Set rust library to build as part of executable
-#add_dependencies(example ${RUST_DEPS})
