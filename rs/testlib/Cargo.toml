@@ -1,0 +1,13 @@
+[package]
+name = "testlib"
+version = "0.1.0"
+authors = ["Ryan Kurte <ryankurte@gmail.com>"]
+
+[build-dependencies]
+rusty-binder = { git = "https://gitlab.com/rusty-binder/rusty-binder.git" }
+rusty-cheddar = { git = "https://gitlab.com/rusty-binder/rusty-cheddar.git" }
+
+[dependencies]
+
+[lib]
+crate-type = ["staticlib"]
