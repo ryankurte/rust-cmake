@@ -6,10 +6,10 @@ This builds arbitrary rust projects under your `${CMAKE_BINARY_DIR}` output dire
 
 ## Layout
 
-- [CMakeLists.txt]() is the top level CMake configuration file
-- [rust.cmake]() defines a function to build rust libraries
-- [bin/]() contains the C source files
-- [rs/]() contains the example rust library
+- [CMakeLists.txt](CMakeLists.txt) is the top level CMake configuration file
+- [rust.cmake](rust.cmake) defines a function to build rust libraries
+- [bin/](bin/) contains the C source files
+- [rs/](rs/) contains the example rust library
 
 ## Building the example
 
